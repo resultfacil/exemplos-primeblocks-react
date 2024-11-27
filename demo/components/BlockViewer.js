@@ -14,7 +14,8 @@ const BlockViewer = (props) => {
         event.preventDefault();
     }
 
-    const codeDisabled = props.free ? false : ((process && process.env.NODE_ENV === 'production') || false);
+    //const codeDisabled = props.free ? false : ((process && process.env.NODE_ENV === 'production') || false);
+	const codeDisabled = true
 
     return (
         <div className="block-section">
