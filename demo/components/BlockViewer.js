@@ -7,15 +7,12 @@ const BlockViewer = (props) => {
     const [blockView, setBlockView] = useState('PREVIEW')
 
     const copyCode = async (event) => {
-        if (!codeDisabled) {
-            await navigator.clipboard.writeText(props.code);
-        }
+       await navigator.clipboard.writeText(props.code);
 
         event.preventDefault();
     }
 
-    //const codeDisabled = props.free ? false : ((process && process.env.NODE_ENV === 'production') || false);
-	const codeDisabled = true
+
 
     return (
         <div className="block-section">
@@ -27,11 +24,10 @@ const BlockViewer = (props) => {
                 </span>
                 <div className="block-actions">
                     <a tabIndex={0} className={classNames({ 'block-action-active': blockView === 'PREVIEW' })} onClick={() => setBlockView('PREVIEW')}><span>Preview</span></a>
-                    <a className={classNames({ 'block-action-active': blockView === 'CODE', 'block-action-disabled p-disabled': codeDisabled })} onClick={() => setBlockView('CODE')} disabled={codeDisabled} >
-                        {codeDisabled && <i className="pi pi-lock"></i>}
+                    <a className={classNames({ 'block-action-active': blockView === 'CODE'})} onClick={() => setBlockView('CODE')}  >
                         <span>Code</span>
                     </a>
-                    <a tabIndex={codeDisabled ? null : "0"} disabled={codeDisabled} className={classNames('block-action-copy', { 'block-action-disabled p-disabled': codeDisabled })} onClick={copyCode}>
+                    <a tabIndex={"0"}  className={"block-action-copy"} onClick={copyCode}>
                         <i className="pi pi-copy"></i>
                     </a>
                 </div>
@@ -42,7 +38,7 @@ const BlockViewer = (props) => {
                         {props.children}
                     </div>}
 
-                {blockView === 'CODE' && !codeDisabled &&
+                {blockView === 'CODE' &&
                     <AppCodeHighlight>
                         {props.code}
                     </AppCodeHighlight>
